@@ -37,9 +37,19 @@
   }
 }
 
+.header {
+  position: relative;
+  height: 15vh;
+}
 
 .Map-container {
   position: relative;
   left: 35%;
   width: 65%;
+}
+
+.sidebar {
+  position: relative;
+  left: 0%;
+  width: 35%;
 }

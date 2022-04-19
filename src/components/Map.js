@@ -23,7 +23,7 @@ useEffect(() => {
 
 return (
     <div className='Map-container'>
-    <div ref={mapContainer} className="map-container" />
+        <div ref={mapContainer} className="map-container" />
     </div>
     );
 }
