@@ -48,11 +48,13 @@
   height: 18vh;
 }
 
-.Map-container {
+.map-container {
   position: relative;
   left: 35%;
   width: 65%;
-  top: 25%;
+  /* top: 25%; */
+  height: 600px;
+  border: 0px;
 }
 
 .sidebar {
