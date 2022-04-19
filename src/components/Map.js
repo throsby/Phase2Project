@@ -22,7 +22,7 @@ useEffect(() => {
     });
 
 return (
-    <div>
+    <div className='Map-container'>
     <div ref={mapContainer} className="map-container" />
     </div>
     );
