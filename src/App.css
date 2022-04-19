@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+
+.Map-container {
+  position: relative;
+  left: 35%;
+  width: 65%;
+}
