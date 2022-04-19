@@ -1,6 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect } from "react"
+import Header from "./components/Header"
+import Map from "./components/Map"
+import Tabs from "./components/Tabs"
+import Sidebar from "./components/Sidebar"
 
 function App() {
 
@@ -18,9 +22,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        
-      </header>
+      <Header/>
+      <Sidebar/>
+      <Tabs/>
+      <Map/>
     </div>
   );
 }
