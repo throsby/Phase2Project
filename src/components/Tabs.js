@@ -23,14 +23,17 @@ return(
       className={({ isActive }) => (isActive ? 'active' : 'navlink')}
     >Tab 3</NavLink>
     <Switch>
+    <Route exact path="/">
+        <Tab tabContent={tabOne}/>
+      </Route>
       <Route exact path="/1">
-        <Tab tabContent={tabOne} number={1} />
+        <Tab tabContent={tabOne}/>
       </Route>
       <Route exact path="/2">
-        <Tab tabContent={tabTwo} number={2}/>
+        <Tab tabContent={tabTwo}/>
       </Route>
       <Route exact path="/3">
-        <Tab tabContent={tabThree} number={3}/>
+        <Tab tabContent={tabThree}/>
       </Route>
     </Switch>
   </div>
