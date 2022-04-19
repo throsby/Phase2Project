@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 
 import mapboxgl from 'mapbox-gl';
+import { APIToken } from "../mapboxToken"
 
-mapboxgl.accessToken = "pk.eyJ1IjoidGhyb3NieXciLCJhIjoiY2wxZ3locXlnMDJvZzNjczYwaGV0djdsbiJ9.nvGIb4KYulk2zFd-ysHfwA"
+mapboxgl.accessToken = APIToken
 function Map(){
 const mapContainer = useRef(null);
 const map = useRef(null);
