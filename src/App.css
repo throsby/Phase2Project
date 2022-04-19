@@ -30,7 +30,18 @@
 
 .potato {
   font-size: 18px;
-  animation: spin 5s infinite;
+  animation: spin .1s infinite;
+  animation: zoom 1s infinite;
+}
+
+@keyframes zoom {
+  from {
+    transform: translate(-100%)
+  }
+  to {
+    transform: translate(100%);
+  }
+  
 }
 
 @keyframes spin {
