@@ -1,22 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect } from "react"
 
 function App() {
+
+  async function fetchData(){
+    let config = {
+
+    }
+    let req = await fetch("https://data.cityofnewyork.us/resource/43nn-pn8j.json")
+    let res = await req.json()
+    console.log(res)
+    return res
+  }
+  
+  useEffect(fetchData,[])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        
       </header>
     </div>
   );
