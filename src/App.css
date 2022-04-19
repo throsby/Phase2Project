@@ -48,12 +48,18 @@
   height: 18vh;
 }
 
-.Map-container {
+.map-container {
   position: relative;
   left: 35%;
   width: 65%;
+<<<<<<< HEAD
   top: 25%;
   height: 100vh;
+=======
+  /* top: 25%; */
+  height: 600px;
+  border: 0px;
+>>>>>>> origin/throsby/resize-height-of-map
 }
 
 .sidebar {

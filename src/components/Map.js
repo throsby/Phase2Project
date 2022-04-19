@@ -9,7 +9,7 @@ const mapContainer = useRef(null);
 const map = useRef(null);
 const [lng, setLng] = useState(-74);
 const [lat, setLat] = useState(40.71);
-const [zoom, setZoom] = useState(9);
+const [zoom, setZoom] = useState(10);
 
 useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -22,7 +22,7 @@ useEffect(() => {
     });
 
 return (
-    <div className='Map-container'>
+    <div>
         <div ref={mapContainer} className="map-container" />
     </div>
     );
