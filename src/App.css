@@ -28,7 +28,12 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+.potato {
+  font-size: 18px;
+  animation: spin 5s infinite;
+}
+
+@keyframes spin {
   from {
     transform: rotate(0deg);
   }
@@ -37,9 +42,10 @@
   }
 }
 
+
 .header {
   position: relative;
-  height: 15vh;
+  height: 18vh;
 }
 
 .Map-container {
