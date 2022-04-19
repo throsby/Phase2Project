@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <Sidebar restaurantArray={setRestaurantArray}/>
+      <Sidebar restaurantArray={restaurantArray}/>
       <Tabs/>
       <Map />
     </div>
