@@ -7,6 +7,7 @@ import Tabs from "./components/Tabs"
 import Sidebar from "./components/Sidebar"
 
 function App() {
+  const [selectedCuisine, setSelectedCuisine] = useState("");
   const [restaurantArray, setRestaurantArray] = useState([])
   useEffect(() => {
     async function fetchData(){
@@ -25,7 +26,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <Sidebar restaurantArray={restaurantArray}/>
+      <Sidebar restaurantArray={restaurantArray} setSelectedCuisine={setSelectedCuisine} selectedCuisine={selectedCuisine}/>
       <Tabs/>
       <Map />
     </div>
