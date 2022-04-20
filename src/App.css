@@ -59,7 +59,7 @@
   height: 18vh;
 }
 
-.map-container {
+.mapboxgl-map {
   position: relative;
   left: 35%;
   width: 65%;

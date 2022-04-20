@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from "react"
 import Header from "./components/Header"
-import Map from "./components/Map"
+import InternalMap from "./components/InternalMap"
 import Tabs from "./components/Tabs"
 import Sidebar from "./components/Sidebar"
 
@@ -28,7 +28,7 @@ function App() {
       <Header/>
       <Sidebar restaurantArray={restaurantArray} setSelectedCuisine={setSelectedCuisine} selectedCuisine={selectedCuisine}/>
       <Tabs/>
-      <Map selectedCuisine={selectedCuisine}/>
+      <InternalMap selectedCuisine={selectedCuisine} restaurantArray={restaurantArray}/>
     </div>
   );
 }
