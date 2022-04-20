@@ -26,9 +26,13 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <Sidebar restaurantArray={restaurantArray} setSelectedCuisine={setSelectedCuisine} selectedCuisine={selectedCuisine}/>
-      <Tabs/>
-      <InternalMap selectedCuisine={selectedCuisine} restaurantArray={restaurantArray}/>
+      <div className='large-container'>
+        <Sidebar restaurantArray={restaurantArray} setSelectedCuisine={setSelectedCuisine} selectedCuisine={selectedCuisine}/>
+        <div className="content-container">
+          <Tabs/>
+          <InternalMap selectedCuisine={selectedCuisine}/>
+        </div>
+      </div>
     </div>
   );
 }

@@ -4,29 +4,52 @@ export default function Restaurants(){
       return element[0].toUpperCase() + element.slice(1);
     }).join(" ")
   }
+  function renderGrades(grade) {
+    switch(grade) {
+      case 'A':
+        return <img src="/imgs/2035725_a grade_card_grade_report_report card_icon.svg" className="card-icon"/>;
+      case 'B':
+        return <img src="/imgs/2035722_b grade_card_grade_report_report card_icon.svg" className="card-icon"/>;
+      case 'C':
+        return <img src="/imgs/2035719_c grade_card_grade_report_report card_icon.svg" className="card-icon"/>;
+      case 'Z':
+        return null;
+      case 'P':
+          return null;
+      default:
+        return null;
+    }
+  }
   const testArray = [
     {
       name: "HILLSTONE MANHATTAN",
       street: "PARK AVENUE SOUTH",
       building: "378",
-      borough: "Manhattan"
+      borough: "Manhattan",
+      grade: "B", 
+      cuisine: "Greek"
     },
     {
       name: "DOMINO'S",
       street: "WESTCHESTER AVENUE",
       building: "2025",
-      borough: "Bronx"
+      borough: "Bronx",
+      grade: "A",
+      cuisine: "Peruvian"
     }
   ]
   return(
   <div>
+    <i class="fa-solid fa-circle-a"></i>
     {
       testArray.map((element)=> {
         return(
-          <div>
+          <div className="restaurant-card">
             <h4 className="restaurant-title">{element.name}</h4>
-            <p className="restaurant-borough">{element.borough}</p>
-            <p className="restaurant-address">{`${element.building} ${capitalize(element.street)}`}</p>
+            <div className="restaurant-address">{`${element.building} ${capitalize(element.street)}`}</div>
+            <div className="restaurant-borough">{element.borough}</div>
+            <h5 className="restaurant-cuisine">{element.cuisine}</h5>
+            {element.grade && renderGrades(element.grade)}
           </div>
         )
       })

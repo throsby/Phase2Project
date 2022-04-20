@@ -5,11 +5,12 @@ import { useState } from "react";
 
 export default function Sidebar({restaurantArray, setSelectedCuisine, selectedCuisine}){
   const uniqueCuisines = [...new Set(restaurantArray.map(item => item.cuisine_description))];
-  
+  const uniqueGrades = [...new Set(restaurantArray.map(item => item.grade))];
+  console.log(uniqueGrades)
   
 return(
   <div className="sidebar">
-    <select name="cuisine" onChange={e => setSelectedCuisine(e.target.value)}>
+    <select className="sidebar-select" name="cuisine" onChange={e => setSelectedCuisine(e.target.value)}>
       <option value="">Select cuisine</option>
       {uniqueCuisines.map((element) => {
         if (!element){
