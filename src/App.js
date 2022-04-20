@@ -28,7 +28,7 @@ function App() {
       <Header/>
       <Sidebar restaurantArray={restaurantArray} setSelectedCuisine={setSelectedCuisine} selectedCuisine={selectedCuisine}/>
       <Tabs/>
-      <Map />
+      <Map selectedCuisine={selectedCuisine}/>
     </div>
   );
 }
