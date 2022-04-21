@@ -24,7 +24,7 @@ function App() {
       return res
     }
     fetchData()
-  },[selectedCuisine])
+  },[])
 
   return (
     <div className="App">

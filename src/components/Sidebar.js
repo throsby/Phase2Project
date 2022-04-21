@@ -34,12 +34,20 @@ export default function Sidebar({restaurantArray, setSelectedCuisine, selectedCu
       default:
         break;
     }
-    
+  }
+
+  function renderTabName(location){
+    if (location === "/"){
+      return "Select Tab 1 cuisine"
+    }
+    else {
+      return `Select Tab ${location.slice(1, 2)} cuisine`
+    }
   }
 return(
   <div>
-    <select className="sidebar-select" name="cuisine" onChange={handleSelectChange}>
-      <option value="">Select cuisine</option>
+    <select className="sidebar-select" name="cuisine" onChange={handleSelectChange} value={selectedCuisine || ''}>
+      <option value="">{`${renderTabName(location.pathname)}`}</option>
       {uniqueCuisines.map((element) => {
         if (!element){
           return(
