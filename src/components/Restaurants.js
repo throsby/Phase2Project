@@ -7,11 +7,11 @@ export default function Restaurants(){
   function renderGrades(grade) {
     switch(grade) {
       case 'A':
-        return <img src="/imgs/2035725_a grade_card_grade_report_report card_icon.svg" className="card-icon"/>;
+        return <img src="/imgs/Grade Card_A_v2.jpeg(3).png" className="card-icon"/>;
       case 'B':
-        return <img src="/imgs/2035722_b grade_card_grade_report_report card_icon.svg" className="card-icon"/>;
+        return <img src="/imgs/Grade Card_A_v2.jpeg(2).png" className="card-icon"/>;
       case 'C':
-        return <img src="/imgs/2035719_c grade_card_grade_report_report card_icon.svg" className="card-icon"/>;
+        return <img src="/imgs/Grade Card_A_v2.jpeg(1).png" className="card-icon"/>;
       case 'Z':
         return null;
       case 'P':
