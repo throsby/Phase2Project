@@ -21,7 +21,7 @@ function App() {
       return res
     }
     fetchData()
-  },[])
+  },[selectedCuisine])
 
   return (
     <div className="App">
@@ -30,7 +30,7 @@ function App() {
         <Sidebar restaurantArray={restaurantArray} setSelectedCuisine={setSelectedCuisine} selectedCuisine={selectedCuisine}/>
         <div className="content-container">
           <Tabs/>
-          <InternalMap selectedCuisine={selectedCuisine}/>
+          <InternalMap selectedCuisine={selectedCuisine} restaurantArray={restaurantArray}/>
         </div>
       </div>
     </div>
