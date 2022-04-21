@@ -1,8 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
-
 import mapboxgl from 'mapbox-gl';
 import Map, { Layer, Marker, Source } from 'react-map-gl';
-
 import { APIToken } from "../mapboxToken"
 
 mapboxgl.accessToken = APIToken
@@ -29,69 +27,8 @@ const geoJsonified = restSubset.map((element) => { return {
     }
   );
 
+  const dataset = {"type" : "FeatureCollection", "features" : geoJsonified}
 
-const dataset = {"type" : "FeatureCollection", "features" : geoJsonified}
-//   }
-console.log("Dataset:", dataset)
-  
-
-  // const GeoJsonInFormat = (latitude,long,business_name,num,street,phone_num,grade) = 
-  // {
-  //     "type" : "Feature",
-  //     "geometry" : {
-  //       "type" : "Point",
-  //       "coordinates" : [latitude, long]
-  //     },
-  //     "properties": {
-  //       "name" : business_name,
-  //       "street_address" : num + street,
-  //       "phone_num" : phone_num,
-  //       "grade" : grade
-  //     }
-  //   }
-  
-
-
-  const geoJSON = {
-    "type": "FeatureCollection",
-    "features": [ 
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [-90.0715, 29.9510]
-        },
-        "properties": {
-          "name": "Fred",
-          "gender": "Male"
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [-92.7298, 30.7373]
-        },
-        "properties": {
-          "name": "Martha",
-          "gender": "Female"
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [-91.1473, 30.4711]
-        },
-        "properties": {
-          "name": "Zelda",
-          "gender": "Female"
-        }
-      }
-    ]
-  }
-
-  console.log(geoJSON)
 
   const layerStyle = {
     id: 'point',
