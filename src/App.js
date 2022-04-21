@@ -9,6 +9,21 @@ import Sidebar from "./components/Sidebar"
 function App() {
   const [selectedCuisine, setSelectedCuisine] = useState("");
   const [restaurantArray, setRestaurantArray] = useState([])
+  const [tabs, setTabs] = useState([
+    {
+      name: "Tab 1",
+      content: "gjdkgljdsklj"
+    },
+    {
+      name: "Tab 2",
+      content: ""
+    },
+    {
+      name: "Tab 3",
+      content: ""
+    }
+]);
+  
   useEffect(() => {
     async function fetchData(){
       // let config = {
@@ -27,9 +42,9 @@ function App() {
     <div className="App">
       <Header/>
       <div className='large-container'>
-        <Sidebar restaurantArray={restaurantArray} setSelectedCuisine={setSelectedCuisine} selectedCuisine={selectedCuisine}/>
+        <Sidebar restaurantArray={restaurantArray} setSelectedCuisine={setSelectedCuisine} selectedCuisine={selectedCuisine} setTabs={setTabs} tabs={tabs}/>
         <div className="content-container">
-          <Tabs/>
+          <Tabs tabs={tabs} />
           <InternalMap selectedCuisine={selectedCuisine}/>
         </div>
       </div>
