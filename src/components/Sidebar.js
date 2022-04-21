@@ -4,7 +4,7 @@ import Add from "./Add"
 import { useState } from "react";
 import { useLocation } from 'react-router-dom';
 
-export default function Sidebar({restaurantArray, setSelectedCuisine, selectedCuisine, setTabs, tabs}){
+export default function Sidebar({restaurantArray, setSelectedCuisine, selectedCuisine}){
   const uniqueCuisines = [...new Set(restaurantArray.map(item => item.cuisine_description))];
   const uniqueGrades = [...new Set(restaurantArray.map(item => item.grade))];
   console.log(uniqueGrades)
@@ -14,21 +14,21 @@ export default function Sidebar({restaurantArray, setSelectedCuisine, selectedCu
     console.log("location", +location.pathname.slice(1, 2))
     switch (location.pathname) {
       case "/3":
-        setTabs(prevState => {
+        setSelectedCuisine(prevState => {
           const [first, second, third] = prevState;
-          return [first,second, {name: event.target.value, content: third.content}]
+          return [first, second, event.target.value]
         })
         break;
       case "/2":
-        setTabs(prevState => {
+        setSelectedCuisine(prevState => {
           const [first, second, third] = prevState;
-          return [first, {name: event.target.value, content: second.content}, third]
+          return [first, event.target.value, third]
         })
         break;
       case "/":
-        setTabs(prevState => {
+        setSelectedCuisine(prevState => {
           const [first, second, third] = prevState;
-          return [{name: event.target.value, content: first.content}, second, third]
+          return [event.target.value, second, third]
         })
         break;
       default:
