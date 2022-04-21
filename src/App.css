@@ -81,20 +81,24 @@
   width: 100%;
 }
 .restaurant-card{
-  border: 1px solid #444;
+  border: 1px solid #ccc;
   margin-bottom: 30px;
   padding: 10px;
   position: relative;
   background-color: #fff;
   color: #444;
   line-height: 150%;
+  transition: 0.3s;
+}
+.restaurant-card:hover{
+  background-color: #ccc;
+  transition: 0.3s;
 }
 .card-icon{
   width: 60px;
   height: 60px;
   position: absolute;
   bottom: -25px;
-  background-color: #fff;
   right: 10px;
   border-radius: 100%;
 }
@@ -114,4 +118,8 @@
 
 .active{
   background-color: #ccc;
+}
+
+select{
+  border: 1px solid #444;
 }

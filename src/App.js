@@ -5,10 +5,12 @@ import Header from "./components/Header"
 import InternalMap from "./components/InternalMap"
 import Tabs from "./components/Tabs"
 import Sidebar from "./components/Sidebar"
+import Restaurants from "./components/Restaurants"
 
 function App() {
   const [selectedCuisine, setSelectedCuisine] = useState(["", "", ""]);
   const [restaurantArray, setRestaurantArray] = useState([])
+  const [selectedRestaurants, setSelectedRestaurants] = useState([])
   
   useEffect(() => {
     async function fetchData(){
@@ -28,10 +30,13 @@ function App() {
     <div className="App">
       <Header/>
       <div className='large-container'>
-        <Sidebar restaurantArray={restaurantArray} setSelectedCuisine={setSelectedCuisine} selectedCuisine={selectedCuisine}/>
+        <div className="sidebar">
+          <Sidebar restaurantArray={restaurantArray} setSelectedCuisine={setSelectedCuisine} selectedCuisine={selectedCuisine}/>
+          <Restaurants selectedRestaurants={selectedRestaurants}/>
+        </div>
         <div className="content-container">
           <Tabs selectedCuisine={selectedCuisine} />
-          <InternalMap selectedCuisine={selectedCuisine} restaurantArray={restaurantArray}/>
+          <InternalMap selectedCuisine={selectedCuisine} restaurantArray={restaurantArray} setSelectedRestaurants={setSelectedRestaurants}/>
         </div>
       </div>
     </div>
