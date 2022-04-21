@@ -1,12 +1,12 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import mapboxgl from 'mapbox-gl';
-import Map, { Layer, Marker, Source } from 'react-map-gl';
+import Map, { Layer, Source } from 'react-map-gl';
 import { APIToken } from "../mapboxToken"
 import { useLocation } from 'react-router-dom';
 
 mapboxgl.accessToken = APIToken
 
-function InternalMap({ selectedCuisine, restaurantArray }) {
+function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants }) {
   let location = useLocation();
   let indices = {"/" : 0, "/2" : 1, "/3" : 2}
   let index = indices[location.pathname]
@@ -14,6 +14,8 @@ function InternalMap({ selectedCuisine, restaurantArray }) {
   const restSubset = restaurantArray.filter((element) => { 
     return element.cuisine_description === selectedCuisine[index] && !element.action.includes("Closed")})
   
+  setSelectedRestaurants(restSubset)
+
   const geoJsonified = restSubset.map((element) => { return {
         "type" : "Feature",
         "geometry" : {
