@@ -44,8 +44,9 @@ function App() {
       <div className='large-container'>
         <Sidebar restaurantArray={restaurantArray} setSelectedCuisine={setSelectedCuisine} selectedCuisine={selectedCuisine} setTabs={setTabs} tabs={tabs}/>
         <div className="content-container">
-          <InternalMap selectedCuisine={selectedCuisine} restaurantArray={restaurantArray}/>
           <Tabs tabs={tabs} />
+          <InternalMap selectedCuisine={selectedCuisine} restaurantArray={restaurantArray}/>
+          
         </div>
       </div>
     </div>
