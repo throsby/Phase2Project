@@ -10,26 +10,27 @@ mapboxgl.accessToken = APIToken
 function InternalMap({ selectedCuisine, restaurantArray }) {
   
   
-let restSubset = restaurantArray.filter((element) => { return element.cuisine_description === selectedCuisine && !element.action.includes("Closed")})
-  
-let geoJsonified = restSubset.map((element) => { return {
-            "type" : "Feature",
-            "geometry" : {
-              "type" : "Point",
-              "coordinates" : [ element.latitude, element.longitude ]
-            },
-            "properties": {
-              "name" : element.dba,
-              "street_address" : element.building + " " + element.street,
-              "phone_num" : element.phone,
-              "grade" : element.grade
-            }
-          }
+const restSubset = restaurantArray.filter((element) => { 
+  return element.cuisine_description === selectedCuisine && !element.action.includes("Closed")})
+
+const geoJsonified = restSubset.map((element) => { return {
+        "type" : "Feature",
+        "geometry" : {
+          "type" : "Point",
+          "coordinates" : [ Math.round(element.longitude * 10000)/10000, Math.round(element.latitude * 10000)/10000 ]
+        },
+        "properties": {
+          "name" : element.dba,
+          "street_address" : element.building.concat(" ",element.street),
+          "phone_num" : element.phone,
+          "grade" : element.grade
         }
+      }
+    }
   );
 
 
-let dataset = {"type" : "FeatureCollection", "features" : geoJsonified}
+const dataset = {"type" : "FeatureCollection", "features" : geoJsonified}
 //   }
 console.log("Dataset:", dataset)
   
@@ -147,7 +148,7 @@ console.log("Dataset:", dataset)
     className = "mapContainer"
     mapStyle = "mapbox://styles/mapbox/streets-v9"
     mapboxAccessToken = { APIToken } >
-    <Source id = "my-data" type="geojson" data={ dataset } >
+    <Source id= "my-data" type="geojson" data={ dataset } >
       <Layer {...layerStyle}/>
     </Source> 
       { /* <Marker longitude={-74} latitude={40.7} anchor="center" color="red" /> */ }

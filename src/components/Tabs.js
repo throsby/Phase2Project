@@ -3,27 +3,7 @@ import {useState, useEffect} from "react"
 import Tab from "./Tab"
 import { Route, Switch, NavLink, useHistory, useParams } from "react-router-dom";
 
-export default function Tabs(){
-const [tabOne, setTabOne] = useState([]);
-const [tabTwo, setTabTwo] = useState([]);
-const [tabThree, setTabThree] = useState([]);
-
-
-const tabs = [
-  {name: "one",
-    content: tabOne
-  },
-  {
-    name: "two",
-    content: tabTwo
-  },
-  {
-    name: "three",
-    content: tabThree
-  }
-]
-
-
+export default function Tabs({tabs}){
 
 return(
   <div className="tabs">
@@ -31,24 +11,24 @@ return(
       to="/"
       className={({ isActive }) => (isActive ? 'active' : 'navlink')}
       exact={true}
-    >Tab 1</NavLink>
+    >{tabs[0].name}</NavLink>
      <NavLink
       to="/2"
       className={({ isActive }) => (isActive ? 'active' : 'navlink')}
-    >Tab 2</NavLink>
+    >{tabs[1].name}</NavLink>
     <NavLink
       to="/3"
       className={({ isActive }) => (isActive ? 'active' : 'navlink')}
-    >Tab 3</NavLink>
+    >{tabs[2].name}</NavLink>
     <Switch>
     <Route exact path="/">
-        <Tab tabContent={tabOne}/>
+        <Tab />
       </Route>
       <Route path="/2">
-        <Tab tabContent={tabTwo}/>
+        <Tab />
       </Route>
       <Route path="/3">
-        <Tab tabContent={tabThree}/>
+        <Tab />
       </Route>
     </Switch>
   </div>
