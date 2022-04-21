@@ -2,16 +2,19 @@ import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import Map, { Layer, Marker, Source } from 'react-map-gl';
 import { APIToken } from "../mapboxToken"
+import { useLocation } from 'react-router-dom';
 
 mapboxgl.accessToken = APIToken
 
 function InternalMap({ selectedCuisine, restaurantArray }) {
+  let location = useLocation();
+  let indices = {"/" : 0, "/2" : 1, "/3" : 2}
+  let index = indices[location.pathname]
   
-    console.log("Cuisine:",selectedCuisine)
-const restSubset = restaurantArray.filter((element) => { 
-  return element.cuisine_description === selectedCuisine && !element.action.includes("Closed")})
-
-const geoJsonified = restSubset.map((element) => { return {
+  const restSubset = restaurantArray.filter((element) => { 
+    return element.cuisine_description === selectedCuisine[index] && !element.action.includes("Closed")})
+  
+  const geoJsonified = restSubset.map((element) => { return {
         "type" : "Feature",
         "geometry" : {
           "type" : "Point",
@@ -19,7 +22,7 @@ const geoJsonified = restSubset.map((element) => { return {
         },
         "properties": {
           "name" : element.dba,
-          "street_address" : element.building.concat(" ",element.street),
+          "street_address" : element.building?.concat(" ",element.street),
           "phone_num" : element.phone,
           "grade" : element.grade
         }
@@ -29,7 +32,6 @@ const geoJsonified = restSubset.map((element) => { return {
 
   const dataset = {"type" : "FeatureCollection", "features" : geoJsonified}
 
-
   const layerStyle = {
     id: 'point',
     type: 'circle',
@@ -38,7 +40,7 @@ const geoJsonified = restSubset.map((element) => { return {
       'circle-color': '#007cbf'
     }
   };
-  console.log(dataset)
+
   // const layer0 = {
   //   id: 'clusters',
   //   type: 'circle',
@@ -71,14 +73,6 @@ const geoJsonified = restSubset.map((element) => { return {
   //   }
   // }
 
-
-
-
-
-
-  // geoJSON.features.forEach((element) => {
-  //   console.log(element.geometry.coordinates)
-  // })
 
   return ( 
   <Map initialViewState = {{ longitude: -74, latitude: 40.7, zoom: 9 }}
