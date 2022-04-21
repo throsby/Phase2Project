@@ -87,8 +87,7 @@ const geoJsonified = restSubset.map((element) => { return {
     mapboxAccessToken = { APIToken } >
     <Source id= "my-data" type="geojson" data={ dataset } >
       <Layer {...layerStyle}/>
-    </Source> 
-      { /* <Marker longitude={-74} latitude={40.7} anchor="center" color="red" /> */ }
+    </Source>
     </Map>
   );
 }

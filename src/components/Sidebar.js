@@ -11,24 +11,29 @@ export default function Sidebar({restaurantArray, setSelectedCuisine, selectedCu
   let location = useLocation();
   
   function handleSelectChange(event){
-    const [head, ...tail] = tabs;
-    console.log(tail)
-    console.log(head)
     console.log("location", +location.pathname.slice(1, 2))
-    // switch (location.pathname) {
-    //   case "/3":
-    //     console.log("this worked lol")
-    //     const [first,second,third] = tabs
-    //     setTabs([first,second, {name: event.target.value, content: third.content}])
-    //     break;
-    
-    //   default:
-    //     break;
-    // }
-    // setTabs((prevState) => {
-    //   console.log(prevState)
-    //   return [{name: event.target.value, content: head.content}, ...tail]})
-    // console.log("new tabs", tabs)
+    switch (location.pathname) {
+      case "/3":
+        setTabs(prevState => {
+          const [first, second, third] = prevState;
+          return [first,second, {name: event.target.value, content: third.content}]
+        })
+        break;
+      case "/2":
+        setTabs(prevState => {
+          const [first, second, third] = prevState;
+          return [first, {name: event.target.value, content: second.content}, third]
+        })
+        break;
+      case "/":
+        setTabs(prevState => {
+          const [first, second, third] = prevState;
+          return [{name: event.target.value, content: first.content}, second, third]
+        })
+        break;
+      default:
+        break;
+    }
   }
 return(
   <div className="sidebar">
