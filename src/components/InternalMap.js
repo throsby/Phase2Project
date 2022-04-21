@@ -14,7 +14,7 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
   const restSubset = restaurantArray.filter((element) => { 
     return element.cuisine_description === selectedCuisine[index] && !element.action.includes("Closed")});
   
-  useEffect(() => { setSelectedRestaurants(restSubset)},[selectedCuisine])
+  useEffect(() => { setSelectedRestaurants(restSubset)},[])
   
   const geoJsonified = restSubset.map((element) => { return {
         "type" : "Feature",
