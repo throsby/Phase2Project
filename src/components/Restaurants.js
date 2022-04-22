@@ -1,4 +1,4 @@
-export default function Restaurants(){
+export default function Restaurants({selectedRestaurants}){
   function capitalize (string){
     return string.toLowerCase().split(" ").map(element => {
       return element[0].toUpperCase() + element.slice(1);
@@ -38,17 +38,19 @@ export default function Restaurants(){
       cuisine: "Peruvian"
     }
   ]
+  // console.log("selected", selectedRestaurants)
   return(
   <div>
     <i class="fa-solid fa-circle-a"></i>
     {
-      testArray.map((element)=> {
+      selectedRestaurants.map((element)=> {
         return(
           <div className="restaurant-card">
-            <h4 className="restaurant-title">{element.name}</h4>
-            <div className="restaurant-address">{`${element.building} ${capitalize(element.street)}`}</div>
-            <div className="restaurant-borough">{element.borough}</div>
-            <h5 className="restaurant-cuisine">{element.cuisine}</h5>
+            <div className="restaurant-close">x</div>
+            <h4 className="restaurant-title">{element.properties.name}</h4>
+            <div className="restaurant-address">{element.properties.street_address}</div>
+            {/* <div className="restaurant-borough">{element.properties.borough}</div> */}
+            <h5 className="restaurant-cuisine">{element.properties.cuisine}</h5>
             {element.grade && renderGrades(element.grade)}
           </div>
         )
