@@ -103,7 +103,11 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
             <div className='popup-bottom-text-line'>{element.properties.street_address} | {element.properties.phone_num} </div>
           </div>
           <div className='popup-side-line'>
-            <img src={`/imgs/Grade Card_${element.properties.grade}_v2.jpeg(3).png`} style={{height: 25, width: 25}}/>
+            <img src={`/imgs/Grade Card_${element.properties.grade}.png`} onError={event => {
+              event.target.src = "/imgs/shrug-emoticon.png"
+              event.onerror = null
+              }}
+              style={{height: 25, width: 25}}/>
             <button onClick={()=>setSelectedRestaurants(prevState => [element, ...prevState])}>+</button>
           </div>
           </div>
