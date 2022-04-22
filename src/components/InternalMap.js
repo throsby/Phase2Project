@@ -104,7 +104,7 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
           </div>
           <div className='popup-side-line'>
             <img src={`/imgs/Grade Card_${element.properties.grade}_v2.jpeg(3).png`} style={{height: 25, width: 25}}/>
-            <button /*onClick={()=>setChasesStateVariable(prevState => [element, ...prevState])}*/>+</button>
+            <button onClick={()=>setSelectedRestaurants(prevState => [element, ...prevState])}>+</button>
           </div>
           </div>
       </Popup>})}
