@@ -126,3 +126,31 @@ select{
   background-color: #ccc;
   height: 30px;
 }
+
+.restaurant-map-popups {
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+}
+
+.popup-text{
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-top-text-line{
+  text-align: left;
+  
+}  
+
+.popup-bottom-text-line{
+  text-align: left;
+  
+}
+
+.popup-side-line{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #888;
+}

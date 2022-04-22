@@ -15,7 +15,7 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
     return element.cuisine_description === selectedCuisine[index] && !element.action.includes("Closed")});
   
   useEffect(() => { setSelectedRestaurants(restSubset)},[])
-  console.log(restSubset)
+
   const geoJsonified = restSubset.map((element) => { return {
         "type" : "Feature",
         "geometry" : {
@@ -26,7 +26,7 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
           "name" : element.dba,
           "street_address" : element.building?.concat(" ",element.street),
           "phone_num" : element.phone,
-          "grade" : element.grade,
+          "grade" : (element.grade ?? "?"),
           "cuisine": element.cuisine_description
         }
       }
@@ -40,7 +40,7 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
   const [showPopup, setShowPopup] = useState(false);
   const handleOnZoom = (e) => {
     setShowPopup(e.viewState.zoom > 14 ? true : false)
-    console.log("Zoom:", e.viewState.zoom)
+    // console.log("Zoom:", e.viewState.zoom)
   }
 
   const clusterLayer = {
@@ -92,14 +92,18 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
       </Source>
       {showPopup && geoJsonified.map((element)=> {
       // console.log(element)
-      return <Popup className='restaurant-map-popups' longitude={element.geometry.coordinates[0]} latitude={element.geometry.coordinates[1]}
+      return <Popup className='popup' longitude={element.geometry.coordinates[0]} latitude={element.geometry.coordinates[1]}
         anchor="top"
         onClose={() => setShowPopup(false)}>
-          <div className='popup-top-text-line'>{element.properties.name} | {element.properties.cuisine}</div>
-          <div className='popup-bottom-text-line'>{element.properties.street_address} | {element.properties.phone_num}</div>
+          <div className='restaurant-map-popups'>
+          <div className='popup-text'>
+            <div className='popup-top-text-line'>{element.properties.name} | {element.properties.cuisine} </div>
+            <div className='popup-bottom-text-line'>{element.properties.street_address} | {element.properties.phone_num} </div>
+          </div>
           <div className='popup-side-line'>
-            {element.properties.grade}
+            <img src={`/imgs/Grade Card_${element.properties.grade}_v2.jpeg(3).png`} style={{height: 25, width: 25}}/>
             <button /*onClick={()=>setChasesStateVariable(prevState => [element, ...prevState])}*/>+</button>
+          </div>
           </div>
       </Popup>})}
     </Map>
