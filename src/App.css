@@ -179,3 +179,8 @@ select{
   justify-content: space-around;
   background-color: #888;
 }
+
+.restaurant-close{
+  position: absolute;
+  right: 15px;
+}
