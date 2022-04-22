@@ -147,11 +147,16 @@ select{
   height: 30px;
 }
 
+.mapboxgl-popup-content{
+  width: max-content;
+}
+
 .restaurant-map-popups {
   display: flex;
   flex-direction: row;
   width: max-content;
 }
+
 
 .popup-text{
   display: flex;
