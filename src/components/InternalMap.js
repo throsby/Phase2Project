@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import Map, { Layer, Source, useMap, Popup } from 'react-map-gl';
 import { APIToken } from "../mapboxToken"
@@ -26,7 +26,8 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
           "name" : element.dba,
           "street_address" : element.building?.concat(" ",element.street),
           "phone_num" : element.phone,
-          "grade" : element.grade
+          "grade" : element.grade,
+          "cuisine": element.cuisine
         }
       }
     }
@@ -34,46 +35,20 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
 
   const dataset = {"type" : "FeatureCollection", "features" : geoJsonified}
 
-
   const map = useMap()
   const handleOnClick = useCallback((e) => {   
-    console.log(e)
-      // Create a popup, but don't add it to the map yet.
-      // const popup = new mapboxgl.Popup({
-      //   closeButton: false,
-      //   closeOnClick: false
-      // });
-       
-      
-       
-      // map.on('mouseleave', 'places', () => {
-      //   map.getCanvas().style.cursor = '';
-      //   popup.remove();
-      // });
+    // console.log(e)
+    
     
   }, []);
 
-  
+  const [showPopup, setShowPopup] = useState(false);
+  const handleOnZoom = (e) => {
+    setShowPopup(e.viewState.zoom > 14 ? true : false)
+    console.log("Zoom:", e.viewState.zoom)
 
-  // map.on('mouseenter', 'places', (e) => {
-  //   // Change the cursor style as a UI indicator.
-  //     map.getCanvas().style.cursor = 'pointer';
-     
-  //   // Copy coordinates array.
-  //     const coordinates = e.features[0].geometry.coordinates.slice();
-  //     // const description = e.features[0].properties.description;
-     
-  //   // Ensure that if the map is zoomed out such that multiple
-  //   // copies of the feature are visible, the popup appears
-  //   // over the copy being pointed to.
-  //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-  //       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-  //     }
-     
-  //   // Populate the popup and set its coordinates
-  //   // based on the feature found.
-  //     popup.setLngLat(coordinates).addTo(map);
-  //   });
+  }
+
 
   const clusterLayer = {
     id: 'clusters',
@@ -108,8 +83,6 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
     }
   };
 
-  
-
   return ( 
     <>
     <Map initialViewState={{ longitude: -74, latitude: 40.7, zoom: 9 }}
@@ -118,12 +91,22 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
       mapboxAccessToken={APIToken}
       ref={map.current}
       onSourceData={handleOnClick}
+      onZoom={handleOnZoom}
     >
-      <Source id="my-data" cluster={true} clusterMaxZoom={14} clusterRadius={50} type="geojson" data={dataset}>
+      <Source id="my-data" cluster={true} clusterMaxZoom={15} clusterRadius={50} type="geojson" data={dataset}>
         <Layer {...clusterLayer} />
         <Layer {...clusterCountLayer} />
         <Layer {...unclusteredPointLayer} />
       </Source>
+      {showPopup && geoJsonified.map((element)=> {
+      // console.log(element)
+      return <Popup className='restaurant-map-popups' longitude={element.geometry.coordinates[0]} latitude={element.geometry.coordinates[1]}
+        anchor="top"
+        onClose={() => setShowPopup(false)}>
+          <div className='popup-top-text-line'>{element.properties.name} | {element.properties.cuisine}</div>
+          <div className='popup-bottom-text-line'>{element.properties.street_address} | {element.properties.phone_num}</div>
+          <div className='popup-side-line'>{element.properties.grade}<button /*onClick={()=>setChasesStateVariable(prevState => [element, ...prevState])}*/>+</button></div>
+      </Popup>})}
     </Map>
     </>
   );
