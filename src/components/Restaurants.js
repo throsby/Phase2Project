@@ -46,7 +46,7 @@ export default function Restaurants({selectedRestaurants}){
       selectedRestaurants.map((element)=> {
         return(
           <div className="restaurant-card">
-            <div className="restaurant-close">x</div>
+            <div className="restaurant-close">✖</div>
             <h4 className="restaurant-title">{element.properties.name}</h4>
             <div className="restaurant-address">{element.properties.street_address}</div>
             {/* <div className="restaurant-borough">{element.properties.borough}</div> */}
