@@ -32,7 +32,7 @@ function App() {
       <div className='large-container'>
         <div className="sidebar">
           <Sidebar restaurantArray={restaurantArray} setSelectedCuisine={setSelectedCuisine} selectedCuisine={selectedCuisine}/>
-          <Restaurants selectedRestaurants={selectedRestaurants}/>
+          <Restaurants setSelectedRestaurants={setSelectedRestaurants} selectedRestaurants={selectedRestaurants}/>
         </div>
         <div className="content-container">
           <Tabs selectedCuisine={selectedCuisine} />

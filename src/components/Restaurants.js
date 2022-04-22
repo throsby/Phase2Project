@@ -1,4 +1,4 @@
-export default function Restaurants({selectedRestaurants}){
+export default function Restaurants({selectedRestaurants, setSelectedRestaurants}){
   function capitalize (string){
     return string.toLowerCase().split(" ").map(element => {
       return element[0].toUpperCase() + element.slice(1);
@@ -20,33 +20,17 @@ export default function Restaurants({selectedRestaurants}){
         return null;
     }
   }
-  const testArray = [
-    {
-      name: "HILLSTONE MANHATTAN",
-      street: "PARK AVENUE SOUTH",
-      building: "378",
-      borough: "Manhattan",
-      grade: "B", 
-      cuisine: "Greek"
-    },
-    {
-      name: "DOMINO'S",
-      street: "WESTCHESTER AVENUE",
-      building: "2025",
-      borough: "Bronx",
-      grade: "A",
-      cuisine: "Peruvian"
-    }
-  ]
-  // console.log("selected", selectedRestaurants)
+  
   return(
   <div>
     <i class="fa-solid fa-circle-a"></i>
     {
-      selectedRestaurants.map((element)=> {
+      selectedRestaurants.map((element, i)=> {
         return(
           <div className="restaurant-card">
-            <div className="restaurant-close">✖</div>
+            <div className="restaurant-close" onClick={() => {
+              setSelectedRestaurants(prevState => (prevState.filter(restaurant => restaurant.properties.name !== element.properties.name)))
+            }}>✖</div>
             <h4 className="restaurant-title">{element.properties.name}</h4>
             <div className="restaurant-address">{element.properties.street_address}</div>
             {/* <div className="restaurant-borough">{element.properties.borough}</div> */}
