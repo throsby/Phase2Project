@@ -1,7 +1,11 @@
 export default function Header(){
 
-    return(<div className="header">
-        <div className="tato"><h1>Welcome to Potato Search </h1><h1 className="potato">🥔</h1></div>
-        <h2>Your home for potatos and all potato related content</h2>
+    return(
+    <div className="header">
+        <div className="header-top">
+            <img className="header-icon" src="/imgs/restaurant.png"/>
+            <h1 className="header-title">HotsPot</h1>
+        </div>
+        <p className="header-desc"> Your one stop shop for the hot spot hot pot in crop top, top knot and flip flops or not! </p>
     </div>)
 }
