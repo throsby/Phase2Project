@@ -15,7 +15,7 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
     return element.cuisine_description === selectedCuisine[index] && !element.action.includes("Closed")});
   
   useEffect(() => { setSelectedRestaurants(restSubset)},[])
-  
+  console.log(restSubset)
   const geoJsonified = restSubset.map((element) => { return {
         "type" : "Feature",
         "geometry" : {
@@ -27,7 +27,7 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
           "street_address" : element.building?.concat(" ",element.street),
           "phone_num" : element.phone,
           "grade" : element.grade,
-          "cuisine": element.cuisine
+          "cuisine": element.cuisine_description
         }
       }
     }
@@ -36,19 +36,12 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
   const dataset = {"type" : "FeatureCollection", "features" : geoJsonified}
 
   const map = useMap()
-  const handleOnClick = useCallback((e) => {   
-    // console.log(e)
-    
-    
-  }, []);
-
+  
   const [showPopup, setShowPopup] = useState(false);
   const handleOnZoom = (e) => {
     setShowPopup(e.viewState.zoom > 14 ? true : false)
     console.log("Zoom:", e.viewState.zoom)
-
   }
-
 
   const clusterLayer = {
     id: 'clusters',
@@ -90,7 +83,6 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
       mapStyle="mapbox://styles/mapbox/streets-v9"
       mapboxAccessToken={APIToken}
       ref={map.current}
-      onSourceData={handleOnClick}
       onZoom={handleOnZoom}
     >
       <Source id="my-data" cluster={true} clusterMaxZoom={15} clusterRadius={50} type="geojson" data={dataset}>
@@ -105,7 +97,10 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
         onClose={() => setShowPopup(false)}>
           <div className='popup-top-text-line'>{element.properties.name} | {element.properties.cuisine}</div>
           <div className='popup-bottom-text-line'>{element.properties.street_address} | {element.properties.phone_num}</div>
-          <div className='popup-side-line'>{element.properties.grade}<button /*onClick={()=>setChasesStateVariable(prevState => [element, ...prevState])}*/>+</button></div>
+          <div className='popup-side-line'>
+            {element.properties.grade}
+            <button /*onClick={()=>setChasesStateVariable(prevState => [element, ...prevState])}*/>+</button>
+          </div>
       </Popup>})}
     </Map>
     </>
