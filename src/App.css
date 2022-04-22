@@ -29,9 +29,7 @@
 }
 
 .potato {
-  font-size: 18px;
-  animation: spin .1s infinite;
-  animation: zoom 1s infinite;
+  animation: spin .1s;
 }
 
 /* @keyframes zoom {
