@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import mapboxgl from 'mapbox-gl';
-import Map, { Layer, Source } from 'react-map-gl';
+import Map, { Layer, Source, useMap, Popup } from 'react-map-gl';
 import { APIToken } from "../mapboxToken"
 import { useLocation } from 'react-router-dom';
 
@@ -34,57 +34,98 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
 
   const dataset = {"type" : "FeatureCollection", "features" : geoJsonified}
 
-  const layerStyle = {
-    id: 'point',
+
+  const map = useMap()
+  const handleOnClick = useCallback((e) => {   
+    console.log(e)
+      // Create a popup, but don't add it to the map yet.
+      // const popup = new mapboxgl.Popup({
+      //   closeButton: false,
+      //   closeOnClick: false
+      // });
+       
+      
+       
+      // map.on('mouseleave', 'places', () => {
+      //   map.getCanvas().style.cursor = '';
+      //   popup.remove();
+      // });
+    
+  }, []);
+
+  
+
+  // map.on('mouseenter', 'places', (e) => {
+  //   // Change the cursor style as a UI indicator.
+  //     map.getCanvas().style.cursor = 'pointer';
+     
+  //   // Copy coordinates array.
+  //     const coordinates = e.features[0].geometry.coordinates.slice();
+  //     // const description = e.features[0].properties.description;
+     
+  //   // Ensure that if the map is zoomed out such that multiple
+  //   // copies of the feature are visible, the popup appears
+  //   // over the copy being pointed to.
+  //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+  //       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  //     }
+     
+  //   // Populate the popup and set its coordinates
+  //   // based on the feature found.
+  //     popup.setLngLat(coordinates).addTo(map);
+  //   });
+
+  const clusterLayer = {
+    id: 'clusters',
     type: 'circle',
+    filter: ['has', 'point_count'],
     paint: {
-      'circle-radius': 10,
-      'circle-color': '#007cbf'
+      'circle-color': ['step', ['get', 'point_count'], '#ff6600', 100, '#ffffff', 750, '#003884'],
+      'circle-radius': ['step', ['get', 'point_count'], 20, 100, 30, 750, 40]
+    }
+  };
+  
+  const clusterCountLayer = {
+    id: 'cluster-count',
+    type: 'symbol',
+    filter: ['has', 'point_count'],
+    layout: {
+      'text-field': '{point_count_abbreviated}',
+      'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+      'text-size': 12
+    }
+  };
+  
+  const unclusteredPointLayer = {
+    id: 'unclustered-point',
+    type: 'circle',
+    filter: ['!', ['has', 'point_count']],
+    paint: {
+      'circle-color': '#4264fb',
+      'circle-radius': 6,
+      'circle-stroke-width': 2,
+      'circle-stroke-color': '#fff'
     }
   };
 
-  // const layer0 = {
-  //   id: 'clusters',
-  //   type: 'circle',
-  //   source: 'earthquakes',
-  //   filter: ['has', 'point_count'],
-  //   paint: {
-  //     // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-  //     // with three steps to implement three types of circles:
-  //     //   * Blue, 20px circles when point count is less than 100
-  //     //   * Yellow, 30px circles when point count is between 100 and 750
-  //     //   * Pink, 40px circles when point count is greater than or equal to 750
-  //     'circle-color': [
-  //       'step',
-  //       ['get', 'point_count'],
-  //       '#51bbd6',
-  //       100,
-  //       '#f1f075',
-  //       750,
-  //       '#f28cb1'
-  //     ],
-  //     'circle-radius': [
-  //       'step',
-  //       ['get', 'point_count'],
-  //       20,
-  //       100,
-  //       30,
-  //       750,
-  //       40
-  //     ]
-  //   }
-  // }
-
+  
 
   return ( 
-  <Map initialViewState = {{ longitude: -74, latitude: 40.7, zoom: 9 }}
-    className = "mapContainer"
-    mapStyle = "mapbox://styles/mapbox/streets-v9"
-    mapboxAccessToken = { APIToken } >
-    <Source id= "my-data" type="geojson" data={ dataset } >
-      <Layer {...layerStyle}/>
-    </Source>
+    <>
+    <Map initialViewState={{ longitude: -74, latitude: 40.7, zoom: 9 }}
+      className="mapContainer"
+      mapStyle="mapbox://styles/mapbox/streets-v9"
+      mapboxAccessToken={APIToken}
+      ref={map.current}
+      onSourceData={handleOnClick}
+    >
+      <Source id="my-data" cluster={true} clusterMaxZoom={14} clusterRadius={50} type="geojson" data={dataset}>
+        <Layer {...clusterLayer} />
+        <Layer {...clusterCountLayer} />
+        <Layer {...unclusteredPointLayer} />
+      </Source>
     </Map>
+    </>
   );
 }
 
