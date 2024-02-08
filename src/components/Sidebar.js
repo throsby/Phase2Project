@@ -15,19 +15,25 @@ export default function Sidebar({restaurantArray, setSelectedCuisine, selectedCu
     switch (location.pathname) {
       case "/3":
         setSelectedCuisine(prevState => {
-          const [first, second, third] = prevState;
+          const [first, second, _] = prevState;
           return [first, second, event.target.value]
         })
         break;
       case "/2":
         setSelectedCuisine(prevState => {
-          const [first, second, third] = prevState;
+          const [first, _, third] = prevState;
           return [first, event.target.value, third]
         })
         break;
       case "/1":
         setSelectedCuisine(prevState => {
-          const [first, second, third] = prevState;
+          const [_, second, third] = prevState;
+          return [event.target.value, second, third]
+        })
+        break;
+        case "/":
+        setSelectedCuisine(prevState => {
+          const [_, second, third] = prevState;
           return [event.target.value, second, third]
         })
         break;
@@ -37,16 +43,17 @@ export default function Sidebar({restaurantArray, setSelectedCuisine, selectedCu
   }
 
   function renderTabName(location){
-    if (location === "/1"){
+    if (location === "/1" || "/"){
       return "Select Tab 1 cuisine"
     }
     else {
       return `Select Tab ${location.slice(1, 2)} cuisine`
     }
   }
+
 return(
   <div>
-    <select className="sidebar-select" name="cuisine" onChange={handleSelectChange} value={selectedCuisine || ''}>
+    <select className="sidebar-select" name="cuisine" onChange={handleSelectChange} value={selectedCuisine}>
       <option value="">{`${renderTabName(location.pathname)}`}</option>
       {uniqueCuisines.map((element) => {
         if (!element){
@@ -54,7 +61,7 @@ return(
             undefined
           )
         }
-        return <option key={element.id} value={element}>{element}</option> 
+        return <option value={element}>{element}</option> 
       })}
     </select>
     

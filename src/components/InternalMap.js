@@ -6,14 +6,15 @@ import { useLocation } from 'react-router-dom';
 
 
 mapboxgl.accessToken = process.env.APITOKEN
-console.log(process.env.THROSBY_TEST)
+console.log("This is THROSBY_TEST", process.env.THROSBY_TEST)
 
 function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants }) {
   
   let location = useLocation();
-  let indices = {"/1" : 0, "/2" : 1, "/3" : 2}
+  let indices = {"/" : 0, "/1" : 0, "/2" : 1, "/3" : 2}
   let index = indices[location.pathname]
   
+  console.log("Location: ",location.pathname)
   const restSubset = restaurantArray.filter((element) => { 
     // if (element.action) console.log(element.action)
     return element.cuisine_description === selectedCuisine[index] && !element.action?.includes("Closed")
@@ -44,6 +45,7 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
   
   const [showPopup, setShowPopup] = useState(false);
   const handleOnZoom = (e) => {
+
     setShowPopup(e.viewState.zoom > 14 ? true : false)
     // console.log("Zoom:", e.viewState.zoom)
   }
@@ -97,25 +99,26 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
       </Source>
       {showPopup && geoJsonified.map((element)=> {
       // console.log(element)
-
-      return <Popup className='popup' longitude={element.geometry.coordinates[0]} latitude={element.geometry.coordinates[1]}
-        anchor="top"
-        onClose={() => setShowPopup(false)}>
-          <div className='restaurant-map-popups'>
-          <div className='popup-text'>
-            <div className='popup-top-text-line'>{element.properties.name} | {element.properties.cuisine} </div>
-            <div className='popup-bottom-text-line'>{element.properties.street_address} | {element.properties.phone_num} </div>
-          </div>
-          <div className='popup-side-line'>
-            <img src={`imgs/Grade Card_${element.properties.grade}.png`} onError={event => {
-              event.target.src = "imgs/shrug-emoticon.png"
-              event.onerror = null
-              }}
-              style={{height: 25, width: 25}}/>
-            <button onClick={()=>setSelectedRestaurants(prevState => [element, ...prevState])}>+</button>
-          </div>
-          </div>
-      </Popup>})}
+        console.log(element.properties)
+        if (element.geometry.coordinates[0] && element.geometry.coordinates[0]) {
+        return <Popup className='popup' longitude={element.geometry.coordinates[0]} latitude={element.geometry.coordinates[1]}
+          anchor="top"
+          onClose={() => setShowPopup(false)}>
+            <div className='restaurant-map-popups'>
+            <div className='popup-text'>
+              <div className='popup-top-text-line'>{element.properties.name} | {element.properties.cuisine} </div>
+              <div className='popup-bottom-text-line'>{element.properties.street_address} | {element.properties.phone_num} </div>
+            </div>
+            <div className='popup-side-line'>
+              <img src={`imgs/Grade Card_${element.properties.grade}.png`} onError={event => {
+                event.target.src = "imgs/shrug-emoticon.png"
+                event.onerror = null
+                }}
+                style={{height: 25, width: 25}}/>
+              <button onClick={()=>setSelectedRestaurants(prevState => [element, ...prevState])}>+</button>
+            </div>
+            </div>
+        </Popup>}})}
     </Map>
     </>
   );

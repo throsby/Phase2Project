@@ -1,9 +1,9 @@
 export default function Restaurants({selectedRestaurants, setSelectedRestaurants}){
-  function capitalize (string){
-    return string.toLowerCase().split(" ").map(element => {
-      return element[0].toUpperCase() + element.slice(1);
-    }).join(" ")
-  }
+  // function capitalize (string){
+  //   return string.toLowerCase().split(" ").map(element => {
+  //     return element[0].toUpperCase() + element.slice(1);
+  //   }).join(" ")
+  // }
   function renderGrades(grade) {
     switch(grade) {
       case 'A':
@@ -23,7 +23,7 @@ export default function Restaurants({selectedRestaurants, setSelectedRestaurants
   
   return(
   <div>
-    <i class="fa-solid fa-circle-a"></i>
+    <i className="fa-solid fa-circle-a"></i>
     {
       selectedRestaurants.map((element, i)=> {
         return(

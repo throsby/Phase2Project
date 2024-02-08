@@ -8,7 +8,7 @@ export default function Tabs({selectedCuisine}){
 return(
   <div className="tabs">
     <NavLink
-      to="1"
+      to="/1"
       className={({ isActive }) => (isActive ? 'active' : 'navlink')}
       exact={true}
     >{selectedCuisine[0] ? selectedCuisine[0]: "Tab 1"}</NavLink>
