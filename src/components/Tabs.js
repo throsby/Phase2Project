@@ -8,20 +8,20 @@ export default function Tabs({selectedCuisine}){
 return(
   <div className="tabs">
     <NavLink
-      to="/"
+      to="1"
       className={({ isActive }) => (isActive ? 'active' : 'navlink')}
       exact={true}
     >{selectedCuisine[0] ? selectedCuisine[0]: "Tab 1"}</NavLink>
      <NavLink
-      to="/2"
+      to="2"
       className={({ isActive }) => (isActive ? 'active' : 'navlink')}
     >{selectedCuisine[1] ? selectedCuisine[1] : "Tab 2"}</NavLink>
     <NavLink
-      to="/3"
+      to="3"
       className={({ isActive }) => (isActive ? 'active' : 'navlink')}
     >{selectedCuisine[2] ? selectedCuisine[2] : "Tab 3"}</NavLink>
     <Switch>
-    <Route exact path="/">
+    <Route exact path="/1">
         <div/>
       </Route>
       <Route path="/2">

@@ -5,16 +5,19 @@ import { APIToken } from "../mapboxToken"
 import { useLocation } from 'react-router-dom';
 
 
-mapboxgl.accessToken = APIToken
+mapboxgl.accessToken = process.env.APITOKEN
+console.log(process.env.THROSBY_TEST)
 
 function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants }) {
   
   let location = useLocation();
-  let indices = {"/" : 0, "/2" : 1, "/3" : 2}
+  let indices = {"/1" : 0, "/2" : 1, "/3" : 2}
   let index = indices[location.pathname]
   
   const restSubset = restaurantArray.filter((element) => { 
-    return element.cuisine_description === selectedCuisine[index] && !element.action.includes("Closed")});
+    // if (element.action) console.log(element.action)
+    return element.cuisine_description === selectedCuisine[index] && !element.action?.includes("Closed")
+  });
   
   useEffect(() => { setSelectedRestaurants(restSubset)},[])
 
@@ -94,6 +97,7 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
       </Source>
       {showPopup && geoJsonified.map((element)=> {
       // console.log(element)
+
       return <Popup className='popup' longitude={element.geometry.coordinates[0]} latitude={element.geometry.coordinates[1]}
         anchor="top"
         onClose={() => setShowPopup(false)}>
@@ -103,8 +107,8 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
             <div className='popup-bottom-text-line'>{element.properties.street_address} | {element.properties.phone_num} </div>
           </div>
           <div className='popup-side-line'>
-            <img src={`/imgs/Grade Card_${element.properties.grade}.png`} onError={event => {
-              event.target.src = "/imgs/shrug-emoticon.png"
+            <img src={`imgs/Grade Card_${element.properties.grade}.png`} onError={event => {
+              event.target.src = "imgs/shrug-emoticon.png"
               event.onerror = null
               }}
               style={{height: 25, width: 25}}/>

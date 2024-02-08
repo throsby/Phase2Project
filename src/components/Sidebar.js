@@ -10,7 +10,7 @@ export default function Sidebar({restaurantArray, setSelectedCuisine, selectedCu
   let location = useLocation();
   
   function handleSelectChange(event){
-    // console.log("location", +location.pathname.slice(1, 2))
+    console.log("location", +location.pathname.slice(1, 2))
     
     switch (location.pathname) {
       case "/3":
@@ -25,7 +25,7 @@ export default function Sidebar({restaurantArray, setSelectedCuisine, selectedCu
           return [first, event.target.value, third]
         })
         break;
-      case "/":
+      case "/1":
         setSelectedCuisine(prevState => {
           const [first, second, third] = prevState;
           return [event.target.value, second, third]
@@ -37,7 +37,7 @@ export default function Sidebar({restaurantArray, setSelectedCuisine, selectedCu
   }
 
   function renderTabName(location){
-    if (location === "/"){
+    if (location === "/1"){
       return "Select Tab 1 cuisine"
     }
     else {
@@ -54,7 +54,7 @@ return(
             undefined
           )
         }
-        return <option value={element}>{element}</option> 
+        return <option key={element.id} value={element}>{element}</option> 
       })}
     </select>
     
