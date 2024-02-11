@@ -98,7 +98,7 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
         <Layer {...unclusteredPointLayer} />
       </Source>
       {showPopup && geoJsonified.map((element)=> {
-      // console.log(element)
+        // console.log(element)
         // console.log(element.properties)
         if (element.geometry.coordinates[0] && element.geometry.coordinates[0]) {
         return <Popup className='popup' longitude={element.geometry.coordinates[0]} latitude={element.geometry.coordinates[1]}

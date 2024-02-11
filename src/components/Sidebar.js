@@ -1,5 +1,5 @@
 
-import Add from "./Add"
+import Add from "./DemoPopup"
 
 import { useState } from "react";
 import { useLocation } from 'react-router-dom';
@@ -65,7 +65,7 @@ return(
       })}
     </select>
     
-    <Add/>
+    {/* <Add/> */}
   </div>
 )
 }

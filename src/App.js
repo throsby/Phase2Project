@@ -6,12 +6,14 @@ import InternalMap from "./components/InternalMap"
 import Tabs from "./components/Tabs"
 import Sidebar from "./components/Sidebar"
 import Restaurants from "./components/Restaurants"
+import DemoPopup from './components/DemoPopup';
 
 function App() {
   const [selectedCuisine, setSelectedCuisine] = useState(["", "", ""]);
   const [restaurantArray, setRestaurantArray] = useState([])
   const [selectedRestaurants, setSelectedRestaurants] = useState([])
-  
+  const [showDemoPopup, setShowDemoPopup] = useState(true)
+
   useEffect(() => {
     async function fetchData(){
       // let config = {
@@ -20,7 +22,7 @@ function App() {
       let req = await fetch("https://data.cityofnewyork.us/resource/43nn-pn8j.json")
       let res = await req.json()
       setRestaurantArray(res)
-      console.log(res, new Date())
+      // console.log(res, new Date())
       return res
     }
     fetchData()
@@ -28,7 +30,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header/>
+      {!!showDemoPopup && <DemoPopup setShowDemoPopup={setShowDemoPopup} />}
+      <Header />
       <div className='large-container'>
         <div className="sidebar">
           <Sidebar restaurantArray={restaurantArray} setSelectedCuisine={setSelectedCuisine} selectedCuisine={selectedCuisine}/>

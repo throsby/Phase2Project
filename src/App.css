@@ -182,3 +182,25 @@ select{
   position: absolute;
   right: 15px;
 }
+
+.demo-popup {
+  position: absolute;
+  margin: 1%;
+  border: 1px solid rgb(68, 68, 68);
+  background-color: rgba(68, 68, 68, 30%);
+  font-size: 10px;
+  top: 4px;
+  left: 4px;
+  width: max(15vmax, 350px);
+  height: max(8vmax, 250px);
+  box-shadow: 2px 1px #888;
+}
+
+.demo-popup-close {
+  position: inherit;
+  border: 0px;
+  background-color: rgba(68, 68, 68, 30%);
+  right: 2px;
+  top: 2px;
+  color: #444;
+}
