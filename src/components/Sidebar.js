@@ -10,7 +10,7 @@ export default function Sidebar({restaurantArray, setSelectedCuisine, selectedCu
   let location = useLocation();
   
   function handleSelectChange(event){
-    console.log("location", +location.pathname.slice(1, 2))
+    // console.log("location", +location.pathname.slice(1, 2))
     
     switch (location.pathname) {
       case "/3":

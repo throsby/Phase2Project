@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 
 
 mapboxgl.accessToken = process.env.APITOKEN
-console.log("This is THROSBY_TEST", process.env.THROSBY_TEST)
+
 
 function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants }) {
   
@@ -14,7 +14,7 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
   let indices = {"/" : 0, "/1" : 0, "/2" : 1, "/3" : 2}
   let index = indices[location.pathname]
   
-  console.log("Location: ",location.pathname)
+
   const restSubset = restaurantArray.filter((element) => { 
     // if (element.action) console.log(element.action)
     return element.cuisine_description === selectedCuisine[index] && !element.action?.includes("Closed")
@@ -99,7 +99,7 @@ function InternalMap({ selectedCuisine, restaurantArray, setSelectedRestaurants 
       </Source>
       {showPopup && geoJsonified.map((element)=> {
       // console.log(element)
-        console.log(element.properties)
+        // console.log(element.properties)
         if (element.geometry.coordinates[0] && element.geometry.coordinates[0]) {
         return <Popup className='popup' longitude={element.geometry.coordinates[0]} latitude={element.geometry.coordinates[1]}
           anchor="top"

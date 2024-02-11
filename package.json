@@ -15,13 +15,13 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "http://hotspot.throsby.dev",
+  "homepage": "http://www.throsby.dev/Phase2Project",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy" : "npm run build && echo 'hotspot.throsby.dev' > ./build/CNAME",
+    "predeploy" : "npm run build ",
     "deploy" : "gh-pages -d build"
   },
   "eslintConfig": {
